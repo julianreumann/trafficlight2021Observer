@@ -1,6 +1,7 @@
 package trafficlight.ctrl;
 
 import trafficlight.gui.TrafficLightGui;
+import trafficlight.inter.Observer;
 import trafficlight.states.State;
 
 public class TrafficLightCtrl {
@@ -25,6 +26,7 @@ public class TrafficLightCtrl {
         gui = new TrafficLightGui(this);
         gui.setVisible(true);
         //TODO useful to update the current state
+        currentState.notifyObservers(currentState);
     }
 
     private void initStates() {
@@ -32,9 +34,12 @@ public class TrafficLightCtrl {
             @Override
             public State getNextState() {
                 previousState = currentState;
+                yellowState.notifyObservers(yellowState);
                 //TODO useful to update the current state and the old one
+                notifyObservers(this);
                 return yellowState;
             }
+
             @Override
             public String getColor() {
                 return "green";
@@ -45,9 +50,12 @@ public class TrafficLightCtrl {
             @Override
             public State getNextState() {
                 previousState = currentState;
+                yellowState.notifyObservers(yellowState);
+                notifyObservers(this);
                 //TODO useful to update the current state and the old one
                 return yellowState;
             }
+
             @Override
             public String getColor() {
                 return "red";
@@ -60,13 +68,18 @@ public class TrafficLightCtrl {
                 if (previousState.equals(greenState)) {
                     previousState = currentState;
                     //TODO useful to update the current state and the old one
+                    redState.notifyObservers(redState);
+                    notifyObservers(this);
                     return redState;
-                }else {
+                } else {
                     previousState = currentState;
                     //TODO useful to update the current state and the old one
+                    greenState.notifyObservers(greenState);
+                    notifyObservers(this);
                     return greenState;
                 }
             }
+
             @Override
             public String getColor() {
                 return "yellow";
@@ -88,7 +101,7 @@ public class TrafficLightCtrl {
         return yellowState;
     }
 
-    public void run()  {
+    public void run() {
         int intervall = 1500;
         while (doRun) {
             try {
@@ -109,4 +122,6 @@ public class TrafficLightCtrl {
     public void stop() {
         doRun = false;
     }
+
+
 }
