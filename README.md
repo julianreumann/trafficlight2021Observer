@@ -2,18 +2,18 @@
 
 Das ist das Grundgerüst für die zweite Übung.
 
-Ziel: Umsetzung des Observer Patterns und des Singelton Patterns
+Ziel: Umsetzung des trafficlight.inter.Observer Patterns und des Singelton Patterns
 
 Folgende Schritte sind zu durchzuführen
 
 * Bauen Sie den Controller auf einen Singelton um
-* Schreiben Sie das Interface Observer mit der Methode
+* Schreiben Sie das Interface trafficlight.inter.Observer mit der Methode
     * update  
-* Implementieren Sie die Klasse Subject mit den Methoden
+* Implementieren Sie die Klasse trafficlight.inter.Subject mit den Methoden
     * addObserver
     * removeObserver
     * NotifyObservers
-* Verbinden Sie Subject und Observer
+* Verbinden Sie trafficlight.inter.Subject und trafficlight.inter.Observer
 
 ![Grün](/pics/greenLight.png)
 ![Gelb](/pics/yellowLight.png)
